@@ -10,7 +10,7 @@ import com.ensolvers.app.entity.Task;
 @Repository
 public interface ITaskService {
 	
-	public List<Task> list();
+	public List<Task> listTasks();
 	public Task listarId(long id);
 	public void save (Task task);
 	public void delete(Task task);

@@ -11,6 +11,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="tasks")
 public class Task {
@@ -22,8 +25,9 @@ public class Task {
 	@Basic
 	public String name;
 
+	@ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.REFRESH})
 	@JoinColumn(name = "fk_folder")
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JsonBackReference	
 	private Folder taskFolder;
 
 	public Task() {
@@ -53,11 +57,11 @@ public class Task {
 		this.name = name;
 	}
 
-	public Folder getTaskFolder() {
+	public Folder gettaskFolder() {
 		return taskFolder;
 	}
 
-	public void setTaskFolder(Folder taskFolder) {
+	public void settaskFolder(Folder taskFolder) {
 		this.taskFolder = taskFolder;
 	}
 

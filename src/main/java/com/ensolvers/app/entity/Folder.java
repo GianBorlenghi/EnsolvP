@@ -11,29 +11,32 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-@Entity
-@Table(name="folders")
-public class Folder {
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+	@Entity
+	@Table(name = "folders")
+	public class Folder {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long idFolder;
-	
+
 	@Basic
 	private String folderName;
-	
-	@OneToMany(mappedBy="taskFolder", cascade = CascadeType.ALL)
-	private List<Task> tasks;
+
+	@OneToMany(mappedBy = "taskFolder", cascade = CascadeType.ALL)
+	@JsonManagedReference
+	private List<Task> tasksFold;
 
 	public Folder() {
 		super();
 	}
 
-	public Folder(long idFolder, String folderName, List<Task> tasks) {
+	public Folder(long idFolder, String folderName, List<Task> tasksFold) {
 		super();
 		this.idFolder = idFolder;
 		this.folderName = folderName;
-		this.tasks = tasks;
+		this.tasksFold = tasksFold;
 	}
 
 	public long getIdFolder() {
@@ -52,14 +55,12 @@ public class Folder {
 		this.folderName = folderName;
 	}
 
-	public List<Task> getTasks() {
-		return tasks;
+	public List<Task> getTasksFold() {
+		return tasksFold;
 	}
 
-	public void setTasks(List<Task> tasks) {
-		this.tasks = tasks;
+	public void setTasksFold(List<Task> tasksFold) {
+		this.tasksFold = tasksFold;
 	}
-	
 
-	
 }
